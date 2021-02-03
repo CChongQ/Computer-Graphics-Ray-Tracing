@@ -10,6 +10,20 @@ bool first_hit(
 {
   ////////////////////////////////////////////////////////////////////////////
   // Replace with your code here:
-  return false;
+  double t_temp; 
+  Eigen::Vector3d n_temp;
+  bool found = false;
+
+  for (int i = 0; i<objects.size(); i++ ){
+    bool hit = objects[i]->intersect(ray,min_t,t_temp,n_temp);
+    if ( hit && ( found == false || t_temp<t) ){
+        hit_id = i;
+        n = n_temp;
+        t = t_temp;
+        found = true;
+    }
+  }
+
+  return found;
   ////////////////////////////////////////////////////////////////////////////
 }
